@@ -41,7 +41,7 @@ animations = [ {
 "speed": 9.0
 } ]
 
-[sub_resource type="CircleShape2D" id=6]
+[sub_resource type="CircleShape2D" id=3]
 radius = 4.2895
 
 [sub_resource type="DynamicFont" id=4]
@@ -66,7 +66,6 @@ light_mask = 0
 position = Vector2( -5.96046e-08, -2 )
 frames = SubResource( 1 )
 animation = "idle"
-frame = 3
 playing = true
 
 [node name="Shadow" type="AnimatedSprite" parent="."]
@@ -80,7 +79,7 @@ playing = true
 [node name="HitBox" type="CollisionShape2D" parent="."]
 light_mask = 0
 position = Vector2( 0.44673, 0.182342 )
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 
 [node name="Name" type="Label" parent="."]
 visible = false
@@ -121,6 +120,7 @@ smoothing_enabled = true
 [node name="ZoomToPlayer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
 [connection signal="timeout" from="AttackDuration" to="." method="_on_AttackDuration_timeout"]
 [connection signal="timeout" from="HurtDuration" to="." method="_on_HurtDuration_timeout"]
 [connection signal="body_entered" from="PickupRange" to="." method="_on_PickupRange_body_entered"]
