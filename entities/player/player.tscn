@@ -1,0 +1,128 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_idle_anim_f1.png" type="Texture" id=1]
+[ext_resource path="res://entities/player/index.gd" type="Script" id=2]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_idle_anim_f2.png" type="Texture" id=3]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_idle_anim_f4.png" type="Texture" id=4]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_run_anim_f1.png" type="Texture" id=5]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_idle_anim_f5.png" type="Texture" id=6]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_run_anim_f2.png" type="Texture" id=7]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_idle_anim_f0.png" type="Texture" id=8]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_idle_anim_f3.png" type="Texture" id=9]
+[ext_resource path="res://entities/player/assets/shadow/shadow_02.png" type="Texture" id=10]
+[ext_resource path="res://entities/player/assets/shadow/shadow_01.png" type="Texture" id=11]
+[ext_resource path="res://entities/player/assets/shadow/shadow_03.png" type="Texture" id=12]
+[ext_resource path="res://entities/player/assets/shadow/shadow_04.png" type="Texture" id=13]
+[ext_resource path="res://assets/fonts/equipaments/EquipmentPro.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://entities/weapons/scenes/weapon.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_run_anim_f0.png" type="Texture" id=16]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_run_anim_f5.png" type="Texture" id=17]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_run_anim_f4.png" type="Texture" id=18]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_run_anim_f3.png" type="Texture" id=19]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 9 ), ExtResource( 4 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "idle",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 19 ), ExtResource( 18 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "running",
+"speed": 10.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "default",
+"speed": 9.0
+} ]
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 4.2895
+
+[sub_resource type="DynamicFont" id=4]
+size = 10
+outline_size = 1
+outline_color = Color( 0.337255, 0.0156863, 0.0156863, 1 )
+font_data = ExtResource( 14 )
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 14.9702
+
+[node name="player" type="KinematicBody2D" groups=[
+"players",
+]]
+script = ExtResource( 2 )
+current_weapon = "bow"
+
+[node name="weapon" parent="." instance=ExtResource( 15 )]
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+light_mask = 0
+position = Vector2( -5.96046e-08, -2 )
+frames = SubResource( 1 )
+animation = "idle"
+frame = 3
+playing = true
+
+[node name="Shadow" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, 3 )
+scale = Vector2( 0.916665, 0.916665 )
+frames = SubResource( 2 )
+frame = 1
+playing = true
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+light_mask = 0
+position = Vector2( 0.44673, 0.182342 )
+shape = SubResource( 6 )
+
+[node name="Name" type="Label" parent="."]
+visible = false
+margin_left = -6.72932
+margin_top = -26.6325
+margin_right = 11.2707
+margin_bottom = -12.6325
+custom_fonts/font = SubResource( 4 )
+text = "Igor"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AttackDuration" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="HurtDuration" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="PickupRange" type="Area2D" parent="."]
+position = Vector2( 0.0897446, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupRange"]
+position = Vector2( -0.112576, 0.0456295 )
+shape = SubResource( 5 )
+
+[node name="arrow_position" type="Position2D" parent="."]
+
+[node name="ArrowStarter" type="Position2D" parent="."]
+position = Vector2( 15, 0 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+smoothing_enabled = true
+
+[node name="ZoomToPlayer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+[connection signal="timeout" from="AttackDuration" to="." method="_on_AttackDuration_timeout"]
+[connection signal="timeout" from="HurtDuration" to="." method="_on_HurtDuration_timeout"]
+[connection signal="body_entered" from="PickupRange" to="." method="_on_PickupRange_body_entered"]
+[connection signal="body_exited" from="PickupRange" to="." method="_on_PickupRange_body_exited"]
+[connection signal="timeout" from="ZoomToPlayer" to="." method="_on_ZoomToPlayer_timeout"]

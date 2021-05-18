@@ -1,0 +1,33 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/props_itens/torch_anim_f2.png" type="Texture" id=1]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/props_itens/torch_anim_f3.png" type="Texture" id=2]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/props_itens/torch_anim_f4.png" type="Texture" id=3]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/props_itens/torch_anim_f0.png" type="Texture" id=4]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/props_itens/torch_anim_f1.png" type="Texture" id=5]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/props_itens/torch_anim_f5.png" type="Texture" id=6]
+[ext_resource path="res://assets/effects/dialog.png" type="Texture" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[node name="wall_torche_1" type="Node2D"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -18 )
+scale = Vector2( 0.888262, 0.888262 )
+frames = SubResource( 1 )
+playing = true
+
+[node name="Light2D" type="Light2D" parent="."]
+visible = false
+position = Vector2( 0.0137224, -0.0490553 )
+scale = Vector2( 0.447706, 0.447706 )
+texture = ExtResource( 8 )
+shadow_enabled = true
+shadow_filter = 5

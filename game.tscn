@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://game.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/equipaments/EquipmentPro.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://GUI/Health.tscn" type="PackedScene" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 10
+font_data = ExtResource( 2 )
+
+[node name="game" type="Node2D"]
+script = ExtResource( 1 )
+dungeon_levels = 4
+
+[node name="world" type="YSort" parent="."]
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="level" type="Label" parent="GUI"]
+margin_left = 5.72165
+margin_top = 137.32
+margin_right = 45.7216
+margin_bottom = 151.32
+custom_fonts/font = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="GUI"]
+margin_left = 760.806
+margin_top = 26.295
+margin_right = 987.806
+margin_bottom = 104.295
+custom_fonts/font = SubResource( 2 )
+text = "RELOAD"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health" parent="GUI" instance=ExtResource( 7 )]
+position = Vector2( 40.8675, 150.923 )
+
+[connection signal="pressed" from="GUI/Button" to="." method="_on_Button_pressed"]

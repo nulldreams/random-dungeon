@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://entities/weapons/scripts/droped_weapon.gd" type="Script" id=1]
+[ext_resource path="res://entities/weapons/assets/axes/axe.png" type="Texture" id=2]
+[ext_resource path="res://entities/ui/popup/popup2.png" type="Texture" id=3]
+[ext_resource path="res://entities/ui/popup/popup1.png" type="Texture" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 3.0
+} ]
+
+[node name="dropd_weapon" type="RigidBody2D" groups=[
+"droped_items",
+]]
+gravity_scale = 0.0
+linear_damp = 50.0
+angular_damp = 30.0
+script = ExtResource( 1 )
+weapon_name = "axe"
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.0944674, 0.0944688 )
+scale = Vector2( 0.777723, 0.777723 )
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -6.79208, 5.05503, -5.72665, 6.18312, 5.61697, -4.09508, 4.11284, -5.22318 )
+
+[node name="Popup" type="Popup" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Popup"]
+position = Vector2( 18.8751, 8.72074 )
+scale = Vector2( 0.335977, 0.335977 )
+frames = SubResource( 1 )
+playing = true

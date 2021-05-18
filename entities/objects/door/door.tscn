@@ -1,0 +1,36 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://entities/objects/door/sprites/door_01.png" type="Texture" id=1]
+[ext_resource path="res://entities/objects/door/sprites/door_02.png" type="Texture" id=2]
+[ext_resource path="res://entities/objects/door/sprites/door_04.png" type="Texture" id=3]
+[ext_resource path="res://entities/objects/door/sprites/door_09.png" type="Texture" id=4]
+[ext_resource path="res://entities/objects/door/sprites/door_08.png" type="Texture" id=5]
+[ext_resource path="res://entities/objects/door/sprites/door_14.png" type="Texture" id=6]
+[ext_resource path="res://entities/objects/door/sprites/door_06.png" type="Texture" id=7]
+[ext_resource path="res://entities/objects/door/sprites/door_07.png" type="Texture" id=8]
+[ext_resource path="res://entities/objects/door/sprites/door_03.png" type="Texture" id=9]
+[ext_resource path="res://entities/objects/door/sprites/door_10.png" type="Texture" id=10]
+[ext_resource path="res://entities/objects/door/sprites/door_13.png" type="Texture" id=11]
+[ext_resource path="res://entities/objects/door/sprites/door_11.png" type="Texture" id=12]
+[ext_resource path="res://entities/objects/door/sprites/door_05.png" type="Texture" id=13]
+[ext_resource path="res://entities/objects/door/sprites/door_12.png" type="Texture" id=14]
+[ext_resource path="res://entities/objects/door/index.gd" type="Script" id=15]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 9 ), ExtResource( 3 ), ExtResource( 13 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "open",
+"speed": 10.0
+} ]
+
+[node name="door" type="AnimatedSprite"]
+frames = SubResource( 1 )
+animation = "idle"
+playing = true
+script = ExtResource( 15 )

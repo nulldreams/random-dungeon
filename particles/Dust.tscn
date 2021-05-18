@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/effects/foot-dust.png" type="Texture" id=1]
+[ext_resource path="res://particles/Dust.gd" type="Script" id=2]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 7, 1 )
+flag_disable_z = true
+spread = 100.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle_random = 1.0
+scale = 0.8
+scale_random = 0.64
+
+[node name="Dust" type="Particles2D"]
+position = Vector2( -0.263519, -0.284118 )
+rotation = -1.5708
+emitting = false
+amount = 6
+lifetime = 0.6
+one_shot = true
+speed_scale = 1.2
+explosiveness = 0.65
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 1 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )

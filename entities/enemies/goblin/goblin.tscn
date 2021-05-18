@@ -1,0 +1,84 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/enemies/goblin/goblin_idle_anim_f0.png" type="Texture" id=1]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/enemies/goblin/goblin_idle_anim_f5.png" type="Texture" id=2]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/enemies/goblin/goblin_run_anim_f1.png" type="Texture" id=3]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/enemies/goblin/goblin_run_anim_f2.png" type="Texture" id=4]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/enemies/goblin/goblin_run_anim_f0.png" type="Texture" id=5]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/enemies/goblin/goblin_idle_anim_f1.png" type="Texture" id=6]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/enemies/goblin/goblin_idle_anim_f3.png" type="Texture" id=7]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/enemies/goblin/goblin_run_anim_f3.png" type="Texture" id=8]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/enemies/goblin/goblin_idle_anim_f4.png" type="Texture" id=9]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/enemies/goblin/goblin_run_anim_f4.png" type="Texture" id=10]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/enemies/goblin/goblin_idle_anim_f2.png" type="Texture" id=11]
+[ext_resource path="res://assets/v1.1 dungeon crawler 16x16 pixel pack/enemies/goblin/goblin_run_anim_f5.png" type="Texture" id=12]
+[ext_resource path="res://entities/enemies/slime/slime.gd" type="Script" id=13]
+[ext_resource path="res://assets/fonts/equipaments/EquipmentPro.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://assets/effects/dialog.png" type="Texture" id=15]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "running",
+"speed": 10.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 5.98649, 3.71592 )
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 53.9521
+
+[sub_resource type="DynamicFont" id=5]
+size = 5
+outline_size = 1
+outline_color = Color( 0.329412, 0.254902, 0.254902, 1 )
+font_data = ExtResource( 14 )
+
+[node name="goblin" type="KinematicBody2D" groups=[
+"enemies",
+]]
+script = ExtResource( 13 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "idle"
+frame = 4
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.00831223, 2.16896 )
+shape = SubResource( 2 )
+
+[node name="arrow_position" type="Position2D" parent="."]
+
+[node name="HurtDuration" type="Timer" parent="."]
+
+[node name="detection_range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_range"]
+shape = SubResource( 3 )
+
+[node name="dialog" type="Sprite" parent="."]
+visible = false
+position = Vector2( -28.774, -17.3 )
+scale = Vector2( 1.0759, 1.0759 )
+texture = ExtResource( 15 )
+
+[node name="Label" type="Label" parent="dialog"]
+margin_left = -26.0
+margin_top = -6.0
+margin_right = 18.0
+custom_fonts/font = SubResource( 5 )
+text = "Can you hack Facebook?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="body_entered" from="detection_range" to="." method="_on_detection_range_body_entered"]
+[connection signal="body_exited" from="detection_range" to="." method="_on_detection_range_body_exited"]
